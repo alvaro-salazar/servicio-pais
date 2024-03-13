@@ -12,7 +12,7 @@
     <artifactId>servicio-pais</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>servicio-pais</name>
-    <description>servicio-pais</description>
+    <description>Este es el microservicio para la entidad pais</description>
     <properties>
         <java.version>17</java.version>
     </properties>
