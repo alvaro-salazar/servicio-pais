@@ -33,7 +33,7 @@ public class PaisRestController {
      */
     @GetMapping("/hola/{nombre}")
     public String holaMundo(@PathVariable String nombre) {
-        return "Hola  " + nombre;
+        return "Hola " + nombre;
     }
 
     /**
