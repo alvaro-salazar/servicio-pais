@@ -82,7 +82,7 @@ public class PaisRestController {
      */
     @DeleteMapping("/paises/{id}")
     public void eliminarPais(@PathVariable Long id) {
-        Pais pais = this.paisService.findById(id);
+        Pais pais = this.paisService.findById(id); // Encuentro un pais por su id
         this.paisService.delete(pais);
     }
 }
