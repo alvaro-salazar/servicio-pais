@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "2efd6331-0c78-442d-b259-83bb9c43f464",
+		"name": "Keycloak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6957633"
+	},
+	"item": [
+		{
+			"name": "login admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parsear el cuerpo de la respuesta\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Guardar el token en una variable de entorno llamada 'authToken'\r",
+							"pm.environment.set(\"authToken\", jsonData.access_token);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "frontend-paises",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "rPw4tNNxTyptOeTc20cvjK5P7qtMm9CK",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "usuario1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/paisesapprealm/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"paisesapprealm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parsear el cuerpo de la respuesta\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Guardar el token en una variable de entorno llamada 'authToken'\r",
+							"pm.environment.set(\"authToken\", jsonData.access_token);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "frontend-paises",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "rPw4tNNxTyptOeTc20cvjK5P7qtMm9CK",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "usuario2",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/paisesapprealm/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"paisesapprealm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hola",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/pais-service/hola/alvaro",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"pais-service",
+						"hola",
+						"alvaro"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizar pais",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"id\" : 0,\r\n          \"pais\" : \"Wakanda\",\r\n          \"capital\" : \"Ur\",\r\n          \"continente\" : \"Africa\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/pais-service/pais",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"pais-service",
+						"pais"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear pais",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJxY2R5Rm5uUUVfU0VaQ1VOb21YWDVLUDVENW93NzVGUFVNVHlwTzJWTU84In0.eyJleHAiOjE3MTY4NzUxMzMsImlhdCI6MTcxNjg3NDgzMywianRpIjoiYzA0MzQyMzMtNDkxNS00YWNkLWE2YTItYTE5NDZjMmRmYzU3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wYWlzZXNhcHByZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJjOTM2MzY2Yi1mMmE3LTQzZWYtYTk5Zi1kZDY4OTYxMTMzMDAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmcm9udGVuZC1wYWlzZXMiLCJzZXNzaW9uX3N0YXRlIjoiZjEyNWIwMzYtMGQ2ZS00MzZmLTg1OTQtNmQ3OTRlZWRhYjRlIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiVVNFUiIsImRlZmF1bHQtcm9sZXMtcGFpc2VzYXBwcmVhbG0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiJmMTI1YjAzNi0wZDZlLTQzNmYtODU5NC02ZDc5NGVlZGFiNGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Im5vbWJyZSBhcGVsbGlkbyIsInByZWZlcnJlZF91c2VybmFtZSI6InVzdWFyaW8xIiwiZ2l2ZW5fbmFtZSI6Im5vbWJyZSIsImZhbWlseV9uYW1lIjoiYXBlbGxpZG8iLCJlbWFpbCI6InVzdWFyaW8xQGVtcHJlc2EuY29tIn0.JXvzgm3Pg8U5mUS6WtVJpe_H2oNglk6GVQNPG00V003XKf_r5s9bX689AbA5X1VRrTzBPXNFH6mKwjjj4yDulKUc6Eay9yx_ltKEbIE3tsihV-ApNruEIzFTLUkrq6BCS4gdt9pJK6kzCPKqvowXhR0QKSR651wqoINFv0w-1MTlde4x5zrt70v4HZy2lILkFpAoo2iv78aRYM8OurfLyd4npCZLm1kZrsRZJ1gs9j7TNUZksvvvw0LzA2wSFsHoKCciIbXvKWfQkFyyP5bAx0kTmKm8H1O-n7MnOzdMC2xV8XnHpI8jAYhTszjw9sFYRClLd850caMXN4eVXamRsg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"id\" : 0,\r\n          \"pais\" : \"Wakanda\",\r\n          \"capital\" : \"Ur\",\r\n          \"continente\" : \"Africa\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/pais-service/pais",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"pais-service",
+						"pais"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar paises",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/pais-service/paises",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"pais-service",
+						"paises"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar un pais por su id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/pais-service/paises/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"pais-service",
+						"paises",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar un pais por su id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/pais-service/paises/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"pais-service",
+						"paises",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

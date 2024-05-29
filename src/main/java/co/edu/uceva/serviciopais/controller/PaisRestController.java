@@ -4,6 +4,7 @@ package co.edu.uceva.serviciopais.controller;
 import co.edu.uceva.serviciopais.model.entities.Pais;
 import co.edu.uceva.serviciopais.model.service.IPaisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class PaisRestController {
      * @return retorna una lista de todos los paises
      */
     @GetMapping("/paises")
+    @PreAuthorize("hasRole('admin_client_role') or hasRole('user_client_role')")
     public List<Pais> listar() {
         return this.paisService.findAll();
     }
@@ -51,6 +53,7 @@ public class PaisRestController {
      * @param id id del pais a buscar
      * @return retorna un pais por su id
      */
+    @PreAuthorize("hasRole('admin_client_role')")
     @GetMapping("/paises/{id}")
     public Pais buscarPais(@PathVariable Long id) {
         return this.paisService.findById(id);
@@ -61,6 +64,7 @@ public class PaisRestController {
      * @param pais pais a guardar
      * @return retorna el pais guardado
      */
+    @PreAuthorize("hasRole('admin_client_role')")
     @PostMapping("/pais")
     public Pais guardarPais(@RequestBody Pais pais) {
         return this.paisService.save(pais);
@@ -71,6 +75,7 @@ public class PaisRestController {
      * @param pais pais a actualizar
      * @return retorna el pais actualizado
      */
+    @PreAuthorize("hasRole('admin_client_role')")
     @PutMapping("/pais")
     public Pais actualizarPais(@RequestBody Pais pais) {
         return this.paisService.save(pais);
@@ -80,6 +85,7 @@ public class PaisRestController {
      * Este metodo se encarga de eliminar un pais por su id
      * @param id id del pais a eliminar
      */
+    @PreAuthorize("hasRole('admin_client_role')")
     @DeleteMapping("/paises/{id}")
     public void eliminarPais(@PathVariable Long id) {
         Pais pais = this.paisService.findById(id); // Encuentro un pais por su id
